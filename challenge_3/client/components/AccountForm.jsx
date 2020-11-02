@@ -9,18 +9,21 @@ class AccountForm extends React.Component {
     }
 
     this.storeInput = this.storeInput.bind(this);
+    this.submitInput = this.submitInput.bind(this);
   }
 
   storeInput(event) {
-    // event.preventDefault();
-    // event.persist();
-    // console.log(event.target);
     this.setState({[event.target.name]: event.target.value});
+  }
+
+  submitInput(event) {
+    event.preventDefault();
+    this.props.addUserInfo(this.state);
   }
 
   render() {
     return (
-      <form>
+      <form onSubmit = {this.submitInput}>
         <label>
           Name:
           <input type = 'text' name = 'name' value = {this.state.name} onChange = {this.storeInput}/>

@@ -10,11 +10,17 @@ class Checkout extends React.Component {
     super(props);
 
     this.state = {
-      userInfo: [],
+      userInfo: {},
       showAccountForm: false
     }
 
     this.renderAccountForm = this.renderAccountForm.bind(this);
+    this.addUserInfo = this.addUserInfo.bind(this);
+  }
+
+  addUserInfo(info) {
+    const updatedUserInfo = Object.assign({}, this.state.userInfo, info);
+    this.setState({userInfo: updatedUserInfo});
   }
 
   renderAccountForm(event) {
@@ -28,7 +34,7 @@ class Checkout extends React.Component {
     return (
       <div>
         <button type = 'button' onClick = {this.renderAccountForm}>Checkout</button>
-        {this.state.showAccountForm ? <AccountForm /> : null}
+        {this.state.showAccountForm ? <AccountForm addUserInfo = {this.addUserInfo}/> : null}
       </div>
     );
   }
