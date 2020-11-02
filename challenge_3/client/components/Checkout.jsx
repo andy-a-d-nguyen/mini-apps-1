@@ -17,7 +17,8 @@ class Checkout extends React.Component {
     this.renderAccountForm = this.renderAccountForm.bind(this);
   }
 
-  renderAccountForm() {
+  renderAccountForm(event) {
+    // event.preventDefault();
     this.setState({
       showAccountForm: true
     })
