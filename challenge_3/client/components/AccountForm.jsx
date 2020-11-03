@@ -23,7 +23,7 @@ class AccountForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit = {this.submitInput}>
+      <form onSubmit = {this.submitInput, this.props.renderAddressForm}>
         <label>
           Name:
           <input type = 'text' name = 'name' value = {this.state.name} onChange = {this.storeInput}/>
@@ -41,5 +41,5 @@ class AccountForm extends React.Component {
     )
   }
 }
-
+// on click of button, invoke a function passed down from Checkout to render address form
 export default AccountForm;

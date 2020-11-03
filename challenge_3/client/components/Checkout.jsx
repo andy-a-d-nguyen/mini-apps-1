@@ -1,4 +1,6 @@
 import AccountForm from './AccountForm.js';
+import AddressForm from './AddressForm.js';
+
 
 // checkout main component
 // checkout button
@@ -11,11 +13,13 @@ class Checkout extends React.Component {
 
     this.state = {
       userInfo: {},
-      showAccountForm: false
+      showAccountForm: false,
+      showAddressForm: false
     }
 
     this.renderAccountForm = this.renderAccountForm.bind(this);
     this.addUserInfo = this.addUserInfo.bind(this);
+    this.renderAddressForm = this.renderAddressForm.bind(this);
   }
 
   addUserInfo(info) {
@@ -30,11 +34,19 @@ class Checkout extends React.Component {
     })
   }
 
+  renderAddressForm(event) {
+    event.preventDefault();
+    this.setState({
+      showAddressForm: true
+    })
+  }
+
   render() {
     return (
       <div>
         <button type = 'button' onClick = {this.renderAccountForm}>Checkout</button>
-        {this.state.showAccountForm ? <AccountForm addUserInfo = {this.addUserInfo}/> : null}
+        {this.state.showAccountForm ? <AccountForm addUserInfo = {this.addUserInfo} renderAddressForm = {this.renderAddressForm}/> : null}
+        {this.state.showAddressForm ? <AddressForm addUserInfo = {this.addUserInfo}/> : null}
       </div>
     );
   }
