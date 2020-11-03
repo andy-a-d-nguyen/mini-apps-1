@@ -20,7 +20,7 @@ class AccountForm extends React.Component {
 
   submitInput(event) {
     // event.preventDefault();
-    console.log(event);
+    // console.log(event);
     this.props.addUserInfo(this.state);
     // this.props.addUserInfo(this.state.accountInfo);
   }
