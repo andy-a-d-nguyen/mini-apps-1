@@ -51,6 +51,7 @@ class AddressForm extends React.Component {
           Phone Number:
           <input type = 'text' name = 'phoneNum' value = {this.state.phoneNum} onChange = {this.storeInput}/>
         </label>
+        <button>Next</button>
       </form>
     )
   }

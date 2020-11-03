@@ -6,6 +6,7 @@ class AccountForm extends React.Component {
       name: '',
       email: '',
       password: ''
+      // accountInfo: {}
     }
 
     this.storeInput = this.storeInput.bind(this);
@@ -14,16 +15,19 @@ class AccountForm extends React.Component {
 
   storeInput(event) {
     this.setState({[event.target.name]: event.target.value});
+    // this.setState(this.state.accountInfo[event.target.name] = event.target.value);
   }
 
   submitInput(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    console.log(event);
     this.props.addUserInfo(this.state);
+    // this.props.addUserInfo(this.state.accountInfo);
   }
 
   render() {
     return (
-      <form onSubmit = {this.submitInput, this.props.renderAddressForm}>
+      <form onSubmit = {this.props.renderAddressForm}>
         <label>
           Name:
           <input type = 'text' name = 'name' value = {this.state.name} onChange = {this.storeInput}/>
@@ -36,7 +40,7 @@ class AccountForm extends React.Component {
           Password:
           <input type = 'password' name = 'password' value = {this.state.password} onChange = {this.storeInput}/>
         </label>
-        <button>Next</button>
+        <button onClick = {this.submitInput}>Next</button>
       </form>
     )
   }
