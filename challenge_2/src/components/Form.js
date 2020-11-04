@@ -22,8 +22,9 @@ class Form extends React.Component {
   }
 
   storeInput(event) {
+    var json = JSON.parse(event.target.value)
     this.setState({
-      JSONdata: event.target.value
+      JSONdata: json
     })
   }
 
