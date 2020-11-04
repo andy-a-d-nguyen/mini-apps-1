@@ -1,21 +1,37 @@
-import Square from './Square.js'
+import Square from './Square.js';
+import {calculateWinner} from './helperFunctions.js';
 
 class Board extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      xIsNext: true
     }
+
+    this.clearBoard = this.clearBoard.bind(this);
   }
 
   handleClick(i) {
     // make a copy of this.state.squares because we don't want to affect it directly
-    const squares = this.state.squares.slice()
-    // assign 'X' to the squares that is clicked
-    squares[i] = 'X';
+    const squares = this.state.squares.slice();
+    // ignore click if there's a winner or a square is already filled or board is full
+    const isFull = squares.every(square => square !== null);
+    if (isFull) {
+      alert('full');
+      return;
+    }
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    // assign 'x' or 'o' to the squares that is clicked
+    squares[i] = this.state.xIsNext ? 'x' : 'o';
     // update this.state.squares with copy of this.state.squares
-    this.setState({squares: squares})
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext
+    })
   }
 
   renderSquare(i) {
@@ -27,8 +43,20 @@ class Board extends React.Component {
     )
   }
 
+  clearBoard(event) {
+    this.setState({
+      squares: Array(9).fill(null)
+    })
+  }
+
   render() {
-    const status = 'Next Player: X'
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner) {
+      status = `Winner: ${winner}`;
+    } else {
+      status = `Next Player: ${this.state.xIsNext? 'x' : 'o'}`
+    }
 
     return (
       <div>
@@ -39,15 +67,16 @@ class Board extends React.Component {
           {this.renderSquare(2)}
         </div>
         <div className = 'row'>
+          {this.renderSquare(3)}
           {this.renderSquare(4)}
           {this.renderSquare(5)}
-          {this.renderSquare(6)}
         </div>
         <div className = 'row'>
+          {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
-          {this.renderSquare(9)}
         </div>
+        <button onClick = {this.clearBoard}>Clear Board</button>
       </div>
     )
   }
